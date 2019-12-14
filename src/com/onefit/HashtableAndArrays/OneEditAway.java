@@ -1,4 +1,6 @@
 package com.onefit.HashtableAndArrays;
+import org.junit.Test;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -22,7 +24,6 @@ public class OneEditAway {
 		assertTrue("space and empty has 0 edit", IsOneEditAway(" ", ""));
 		//assertThrows(IllegalArgumentException.class, () -> IsOneEditAway(null, null));
 	}
-
 	private static boolean IsOneEditAway(String first, String second) {
 		if (first == null || second == null) {
 			throw new IllegalArgumentException("Both string should be not null");

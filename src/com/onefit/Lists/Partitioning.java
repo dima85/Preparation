@@ -4,40 +4,41 @@ public class Partitioning {
 
     public static void main(String[] pars) {
         ListNode head = new ListNode(3);
-        head.Next = new ListNode(5);
+        head.Next = new ListNode(15);
         head.Next.Next = new ListNode(8);
         head.Next.Next.Next = new ListNode(5);
-        head.Next.Next.Next.Next = new ListNode(10);
+        head.Next.Next.Next.Next = new ListNode(4);
         head.Next.Next.Next.Next.Next = new ListNode(1);
 
-        ListNode res1 = new ListNode(3);
-        res1.Next = new ListNode(1);
-        res1.Next.Next = new ListNode(5);
-        res1.Next.Next.Next = new ListNode(8);
-        res1.Next.Next.Next.Next = new ListNode(5);
-        res1.Next.Next.Next.Next.Next = new ListNode(10);
+        ListNode res1 = new ListNode(1);
+        res1.Next = new ListNode(4);
+        res1.Next.Next = new ListNode(3);
+        res1.Next.Next.Next = new ListNode(15);
+        res1.Next.Next.Next.Next = new ListNode(8);
+        res1.Next.Next.Next.Next.Next = new ListNode(5);
 
         ListNode newHead =  Partition(head, 5);
 
-        assert AreEqual(head, res1);
+        assert AreEqual(newHead, res1);
     }
 
     private static ListNode Partition(ListNode head, int value) {
-        ListNode newHead = head;
-        ListNode tail = head;
-        while (head != null)
-        {
-            ListNode next = head.Next;
-            if (head.Value < value) {
-                head.Next = newHead;
-                newHead = head;
+        // 6 7 2 5 1 2 10 7
+        ListNode cur = head.Next;
+        ListNode prev = null;
+        while (cur != null) {
+            if (cur.Value < value) {
+                prev.Next = cur.Next;
+                cur.Next = head;
+                head = cur;
+                cur = prev.Next;
             }
-            if (head.Value >= value) {
-                newHead.Next = head;
+            else {
+                prev = cur;
+                cur = cur.Next;
             }
-            head = head.Next;
         }
-        return newHead;
+        return head;
     }
 
     public static boolean AreEqual(ListNode head1, ListNode head2) {

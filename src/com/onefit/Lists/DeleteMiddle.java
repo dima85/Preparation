@@ -15,9 +15,21 @@ public class DeleteMiddle {
         res1.Next.Next.Next = new ListNode(5);
         res1.Next.Next.Next.Next = new ListNode(6);
 
-        DeleteMiddleNode(head);
+        //DeleteMiddleNode(head);
+        DeleteRandomNode(head.Next.Next);
 
         assert AreEqual(head, res1);
+    }
+
+    private static void DeleteRandomNode(ListNode randomNode) {
+        if (randomNode.Next == null) {
+            throw new IllegalArgumentException("Node cannot be last in list");
+        }
+        ListNode next = randomNode.Next;
+
+        randomNode.Value = next.Value;
+        randomNode.Next = next.Next;
+        next.Next = null;
     }
 
     private static void DeleteMiddleNode(ListNode head) {
